@@ -45,3 +45,26 @@ def mergeOverlappingIntervals(intervals):
                 idx+=1
     #print(intervals)    
     return intervals
+
+
+
+#or Node approach :
+
+class Pair:
+  def __init__(self, first, second):
+    self.first = first
+    self.second = second
+
+def merge_intervals(v):
+  idx=0
+  v.sort(key=lambda x: x.first)
+  # write your code here
+  for i in range(len(v)):
+    if idx+1<len(v):
+      if v[idx].second >=v[idx+1].first:
+        v[idx]=Pair(v[idx].first,max(v[idx+1].second,v[idx].second))
+        v.remove(v[idx+1])
+      else:
+        idx+=1    
+        
+  return v
